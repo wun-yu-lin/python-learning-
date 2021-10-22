@@ -211,3 +211,54 @@ df=df.fillna(method="ffill")
 df1 = pd.read_csv("C:/Users/wunyu/Documents/locatiion.csv")
 city_map = {"AA":"AAA","BB":"BBB","CC":"CCC","DD":"DDD","EE":"EEE","FF":"FFF"}
 df1["region"]=df1["city"].map(city_map)
+
+
+##劃分、篩選df資料 #cut #只能數字
+#pd.cut(指定Series欄位物件, 區間數量或自定義的區間list)
+df1_cut = pd.cut(df1["ID"],3) #column "ID"切成三等份
+
+df1_cut_counts = pd.value_counts(df1_cut)
+
+#如何定義劃分範圍及範圍區間名稱
+ID_bins = [99,103,105]   #定義劃分範圍
+ID_labels = ["ID in 100-103", "ID in 104-105"] # #定義範圍名稱
+df1_cut_labels = pd.cut(df1["ID"],ID_bins,labels=ID_labels) #劃分
+pd.value_counts(df1_cut_labels) #計算區間的數據數量
+df1["ID range"] = df1_cut_labels  #區間資料傳入DataFrame
+
+
+
+#取得頭尾列row
+#head() 取得前幾筆數據
+#tail() 取得最後幾筆數據
+
+
+#_______________________________________________________
+
+
+#df進行四則運算
+import pandas as pd
+import numpy as np
+np.random.seed(0)
+columns = ["A","B","C","D","E"]
+df111 = pd.DataFrame()
+
+for x in columns:
+    df111[x]=np.random.choice(range(10,20),10)
+    
+duble_df111 = df111*2
+square_df111 = df111**2
+sqrrt_df = np.sqrt(df111)
+
+#快速取得統計數據 df.describe()
+df111_des = df111.describe()
+df111_des.loc["mean"] #抓取mean數據
+
+#計算row or column之間的差 diff
+df111.diff(-2,axis=0) #表示下兩列的差距
+
+#分組統計 df.groupby("欄位")
+group_data = {"Prefecture":["Tokyo","Kanagawa","Osaka","Kyoto","Aichi"],"Area":[2190,2415,1904,4610,5172],"Population":[13636,9145,8837,2605,7505],"Region":["Kanto","Kanto","Kinki","Kinki","Chubu"]}
+group_df = pd.DataFrame(group_data)
+group_region =group_df.groupby("Region")
+mean_df = group_region.mean()
