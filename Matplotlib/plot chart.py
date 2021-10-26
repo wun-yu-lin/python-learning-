@@ -75,16 +75,16 @@ for z in range(1,5):
     ax.set_ylabel("y-axis")
     ax.grid(True)
     if z == 1:
-        ax.plot(x,y)
+        ax.plot(x,y,color="b")
         ax.set_title("sin(x)")
     elif z ==2:
-        ax.plot(x,y1)
+        ax.plot(x,y1,color="g")
         ax.set_title("cos(x)")
     elif z ==3:
-        ax.plot(x,y2)
+        ax.plot(x,y2,color="r")
         ax.set_title("tan(x)")
     else:
-        ax.plot(x,y3)
+        ax.plot(x,y3,color="k")
         ax.set_title("abs(x)")
 
 
