@@ -35,17 +35,17 @@ import matplotlib.pyplot as plt
 dx,dy = make_blobs(n_samples=10000,n_features=2,centers=2,random_state=0)
 plt.figure(figsize=(10,10))
 plt.scatter(dx.T[0],dx.T[1],c=dy,cmap="cool")
-plt.title("No std")
+plt.title("No Scaled")
 plt.grid(True)
 plt.show()
 # =============================================================================
 
-##data standardization 加速模型訓練速度
-
-#StandardScaler().fit_transform(data) #平均數=0,1變異數=1
-#MinMaxScaler().fit_transform(data) #資料在0-1之間
-#RobustScaler().fit_transform(data) #Q1-Q3外的點會大於1 其餘會0-1之間
-
+# =============================================================================
+# ##data standardization 加速模型訓練速度
+# 
+# #StandardScaler().fit_transform(data) #平均數=0,1變異數=1
+# #MinMaxScaler().fit_transform(data) #資料在0-1之間
+# #RobustScaler().fit_transform(data) #Q1-Q3外的點會大於1 其餘會0-1之間
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
@@ -53,6 +53,19 @@ dx,dy = make_blobs(n_samples=10000,n_features=10,centers=2,random_state=0)
 dx_std = StandardScaler().fit_transform(dx)
 plt.figure(figsize=(10,10))
 plt.scatter(dx_std.T[0],dx_std.T[1],c=dy,cmap="Dark2")
-plt.title("std")
+plt.title("Scaled")
 plt.grid()
 plt.show()
+# =============================================================================
+
+#分割 training data and testing data
+#train_test_split(data,label,test_size,random_state)
+from sklearn.datasets import make_blobs
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+dx,dy = make_blobs(n_samples=500,n_features=2,centers=2,random_state=0)
+dx_std = StandardScaler().fit_transform(dx)
+
+dx_train, dx_test, dy_train, dy_test= train_test_split(dx_std,dy,test_size=0.2,random_state=0) #20%當testing data 剩餘80%當training data
+
+
