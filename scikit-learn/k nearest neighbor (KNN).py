@@ -6,6 +6,11 @@ Created on Mon Nov  1 15:18:34 2021
 """
 # K nearest neighbor (KNN) K最近鄰演算法
 # Supervise learning 監督式分類器
+# 不算train 因為是將原有數據進行新資料預判，所以learning運算量較小
+# 良好的K值可使Model有適當的彈性
+# K 值會大會導致 分類結果會趨向樣品數高的類別，所謂的underfitting
+# K 值會小會導致 overfitting
+
 
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
