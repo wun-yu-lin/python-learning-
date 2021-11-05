@@ -27,7 +27,7 @@ for x in z:
 plt.figure(figsize=(10,10))
 plt.plot(z,score_testing_save, label="testing data",color="r")
 plt.plot(z,score_training_save, label="training data",color="b")
-plt.plot(z,cv_scores,label="N-fokd val score",color="g")
+plt.plot(z,cv_scores,label="N-fold val score",color="g")
 plt.legend()
 plt.grid(True)
 plt.show()
